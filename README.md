@@ -1,0 +1,64 @@
+# AI Agents with Pydantic
+
+This is a simple Streamlit-based application demonstrating an AI search agent built using the `pydantic-ai` library. The project lets users enter search queries and retrieves recent web results using the `ddgs` library.
+
+## Features
+
+- Streamlit UI for entering queries
+- Pydantic-based agent configuration
+- Tool for internet search using DuckDuckGo (via `ddgs`)
+- Example of handling network errors and normalizing tool output
+
+## Requirements
+
+Python 3.10+ (a virtual environment is recommended)
+
+Dependencies are listed in `requirements.txt`. Install them with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+## Setup
+
+1. Clone the repository.
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1  # PowerShell
+   # or
+   source .venv/bin/activate      # macOS / Linux
+   ```
+3. Install requirements (see above).
+4. Create a `.env` file if you want to set environment variables for the OpenAI model key (e.g., `OPENAI_API_KEY`).
+
+## Running the app
+
+Start the Streamlit application:
+
+```bash
+streamlit run main.py
+```
+
+Then open the URL printed by Streamlit (usually http://localhost:8501) in your browser.
+
+Enter a query and click **Search** to see results.
+
+## Project Structure
+
+```
+main.py               # Streamlit front-end
+agents/
+  search_agent.py     # Agent configuration
+tools/
+  search_internet.py  # Web search tool (DDGS)
+  schema.py           # Pydantic input/output models
+requirements.txt      # Python dependencies
+```
+
+## Troubleshooting
+
+- **DDGSException / network errors**: The search tool now catches exceptions and returns an empty list. Ensure your machine has internet access and no firewall is blocking requests to DuckDuckGo or Yandex.
+- **Async errors in Streamlit**: The app normalizes asynchronous output, but avoid using `asyncio.run()` inside callbacks if Streamlit reports event loop errors.
+
+

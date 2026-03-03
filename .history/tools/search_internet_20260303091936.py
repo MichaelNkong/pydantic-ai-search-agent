@@ -31,9 +31,9 @@ def search_internet(input:SearchInput) -> dict:
                 results.append(sr)
     except Exception:
         logger.exception("search_internet: DDGS search failed")
-        return SearchOutput(results=[]).model_dump()
+        return SearchOutput(results=[]).dict()
 
-    return SearchOutput(results=results).model_dump()
+    return SearchOutput(results=results).dict()
 if __name__ == "__main__":
     input_data = SearchInput(query="latest AI news")
     result = search_internet(input_data)
